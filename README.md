@@ -2,7 +2,7 @@
 
 An InDesign Script to pull WordPress posts directly into your layouts.
 
-Local Installation
+##Local Installation
 	
 	- Download and install ExtendScript Toolkit
 	- Open Scripts Pane in InDesign
