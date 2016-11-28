@@ -5,12 +5,30 @@
 Main();
 
 function Main(){
-	reply = GetURL('http://wp-rest.dev/wp-json/wp/v2/posts');
+     // TODO: Add timeout if URL isn't available
+    
+    reply = GetURL('http://wp-rest.dev/wp-json/wp/v2/posts');
 
-	posts = reply.body;
+    posts = reply.body;
 
-	// Equivalent of console.log()
-	$.writeln(posts);
+    var myDialog = app.dialogs.add({name:"WP Import Dialog"});
+    
+    //Add a dialog column.
+    with(myDialog.dialogColumns.add()){
+        staticTexts.add({staticLabel:"This is a very simple dialog box."});
+    }
+    //Show the dialog box.
+    var myResult = myDialog.show();
+    //If the user clicked OK, display one message;
+    //if they clicked Cancel, display a different message.
+    if(myResult == true){
+        alert("You clicked the OK button.");
+    }
+    else{
+        alert("You clicked the Cancel button.");
+    }
+    //Remove the dialog box from memory.
+    myDialog.destroy();
 }
 
 
