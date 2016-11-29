@@ -9,26 +9,23 @@ function Main(){
     
     reply = GetURL('http://wp-rest.dev/wp-json/wp/v2/posts');
 
-    posts = reply.body;
+  posts = reply.body;
 
-    var myDialog = app.dialogs.add({name:"WP Import Dialog"});
+    var myWindow = new Window ("dialog", "WordPress Importer");
+    var urlInputGroup = myWindow.add ("group");
     
-    //Add a dialog column.
-    with(myDialog.dialogColumns.add()){
-        staticTexts.add({staticLabel:"This is a very simple dialog box."});
-    }
-    //Show the dialog box.
-    var myResult = myDialog.show();
-    //If the user clicked OK, display one message;
-    //if they clicked Cancel, display a different message.
-    if(myResult == true){
-        alert("You clicked the OK button.");
-    }
-    else{
-        alert("You clicked the Cancel button.");
-    }
-    //Remove the dialog box from memory.
-    myDialog.destroy();
+    urlInputGroup.add ("statictext", undefined, "WordPress Site URL:");
+
+    var siteUrl = urlInputGroup.add ("edittext", undefined, "");
+    siteUrl.characters = 50;
+    
+    var actionButtonGroup = myWindow.add ("group");
+    actionButtonGroup.alignment = "right";
+    
+    actionButtonGroup.add ("button", undefined, "Cancel");
+    actionButtonGroup.add ("button", undefined, "Insert");
+    
+    myWindow.show ();
 }
 
 
