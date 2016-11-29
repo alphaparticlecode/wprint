@@ -5,25 +5,40 @@
 Main();
 
 function Main(){
-     // TODO: Add timeout if URL isn't available
-    
-    reply = GetURL('http://wp-rest.dev/wp-json/wp/v2/posts');
-
-  posts = reply.body;
-
+     
     var myWindow = new Window ("dialog", "WordPress Importer");
-    var urlInputGroup = myWindow.add ("group");
+    var urlInputGroup = myWindow.add("group");
     
     urlInputGroup.add ("statictext", undefined, "WordPress Site URL:");
 
     var siteUrl = urlInputGroup.add ("edittext", undefined, "");
     siteUrl.characters = 50;
     
-    var actionButtonGroup = myWindow.add ("group");
+    urlInputGroup.add ("button", undefined, "Update");
+    
+    var searchGroup = myWindow.add("group");
+    
+    searchGroup.add ("statictext", undefined, "Search:");
+    
+    searchGroup.alignment = "right";
+    
+    var postSearch = searchGroup.add ("edittext", undefined, "");
+    postSearch.characters = 50;
+    
+    searchGroup.add ("button", undefined, "Search");
+    
+    var postListGroup = myWindow.add("group");
+    var postList = postListGroup.add ("listbox", undefined, ["one", "two", "three"]);
+    postList.minimumSize = [500,200]
+    postListGroup.alignment = "right";
+    
+    var actionButtonGroup = myWindow.add("group");
     actionButtonGroup.alignment = "right";
     
     actionButtonGroup.add ("button", undefined, "Cancel");
     actionButtonGroup.add ("button", undefined, "Insert");
+    
+    // TODO: Call URL to get posts, Add timeout if URL isn't available
     
     myWindow.show ();
 }
