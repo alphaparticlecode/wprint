@@ -40,7 +40,12 @@ function Main(){
     
     urlUpdateButton.onClick = function () {
         postList.removeAll();
-        var url = siteUrl.text + "/wp-json/wp/v2/posts";
+        
+        if(siteUrl.text[siteUrl.text.length-1] != '/'){
+            siteUrl.text = siteUrl.text + '/';
+        }
+        
+        var url = siteUrl.text + "wp-json/wp/v2/posts";
         posts = fetchPosts(url);
         
         for (var i = 0; i < posts.length; i++){
