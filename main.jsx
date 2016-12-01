@@ -16,10 +16,6 @@ function Main(){
     
     urlUpdateButton = urlInputGroup.add ("button", undefined, "Update");
     
-    urlUpdateButton.onClick = function () {
-        alert("clicked");
-     }
-    
     var searchGroup = myWindow.add("group");
     
     searchGroup.add ("statictext", undefined, "Search:");
@@ -42,12 +38,16 @@ function Main(){
     actionButtonGroup.add ("button", undefined, "Cancel");
     actionButtonGroup.add ("button", undefined, "Insert");
     
-    posts = fetchPosts("http://wp-rest.dev/wp-json/wp/v2/posts");
+    urlUpdateButton.onClick = function () {
+        postList.removeAll();
+        var url = siteUrl.text + "/wp-json/wp/v2/posts";
+        posts = fetchPosts(url);
         
-    for (var i = 0; i < posts.length; i++){
-        var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
-         postList.add("item", postString);
-    }
+        for (var i = 0; i < posts.length; i++){
+            var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
+            postList.add("item", postString);
+        }
+     }
     
     myWindow.show ();
 }
