@@ -25,7 +25,7 @@ function Main(){
     var postSearch = searchGroup.add ("edittext", undefined, "");
     postSearch.characters = 50;
     
-    searchGroup.add ("button", undefined, "Search");
+    var searchButton = searchGroup.add ("button", undefined, "Search");
     
     var postListGroup = myWindow.add("group");
     var postList = postListGroup.add ("listbox", undefined, ["Set your WordPress URL above to see posts here"]);
@@ -46,6 +46,22 @@ function Main(){
         }
         
         var url = siteUrl.text + "wp-json/wp/v2/posts";
+        posts = fetchPosts(url);
+        
+        for (var i = 0; i < posts.length; i++){
+            var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
+            postList.add("item", postString);
+        }
+     }
+ 
+     searchButton.onClick = function () {
+        postList.removeAll();
+        
+        if(siteUrl.text[siteUrl.text.length-1] != '/'){
+            siteUrl.text = siteUrl.text + '/';
+        }
+        
+        var url = siteUrl.text + "wp-json/wp/v2/posts?search=" + encodeURIComponent(postSearch.text);;
         posts = fetchPosts(url);
         
         for (var i = 0; i < posts.length; i++){
