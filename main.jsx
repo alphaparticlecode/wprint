@@ -14,7 +14,11 @@ function Main(){
     var siteUrl = urlInputGroup.add ("edittext", undefined, "");
     siteUrl.characters = 50;
     
-    urlInputGroup.add ("button", undefined, "Update");
+    urlUpdateButton = urlInputGroup.add ("button", undefined, "Update");
+    
+    urlUpdateButton.onClick = function () {
+        alert("clicked");
+     }
     
     var searchGroup = myWindow.add("group");
     
@@ -28,7 +32,7 @@ function Main(){
     searchGroup.add ("button", undefined, "Search");
     
     var postListGroup = myWindow.add("group");
-    var postList = postListGroup.add ("listbox", undefined, []);
+    var postList = postListGroup.add ("listbox", undefined, ["Set your WordPress URL above to see posts here"]);
     postList.minimumSize = [500,200]
     postListGroup.alignment = "right";
     
@@ -38,11 +42,7 @@ function Main(){
     actionButtonGroup.add ("button", undefined, "Cancel");
     actionButtonGroup.add ("button", undefined, "Insert");
     
-    // TODO: Add timeout if URL isn't available
-    reply = GetURL('http://wp-rest.dev/wp-json/wp/v2/posts');
-    
-    // Converting string returned by GetURL into an actual object that we can use
-    posts = eval(reply.body);
+    posts = fetchPosts("http://wp-rest.dev/wp-json/wp/v2/posts");
         
     for (var i = 0; i < posts.length; i++){
         var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
@@ -50,6 +50,16 @@ function Main(){
     }
     
     myWindow.show ();
+}
+
+function fetchPosts(url){
+    // TODO: Add timeout if URL isn't available
+    reply = GetURL(url);
+    
+    // Converting string returned by GetURL into an actual object that we can use
+    posts = eval(reply.body);
+    
+    return posts;
 }
 
 
