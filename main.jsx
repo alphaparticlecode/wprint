@@ -36,7 +36,7 @@ function Main(){
     actionButtonGroup.alignment = "right";
     
     actionButtonGroup.add ("button", undefined, "Cancel");
-    actionButtonGroup.add ("button", undefined, "Insert");
+    var insertButton = actionButtonGroup.add ("button", undefined, "Insert");
     
     urlUpdateButton.onClick = function () {
         postList.removeAll();
@@ -69,8 +69,18 @@ function Main(){
             postList.add("item", postString);
         }
      }
+ 
+    insertButton.onClick = function(){
+        var postIndex = postList.selection.index;
+        
+        var postContent = posts[postIndex].content.rendered;
+        
+        app.selection[0].parentStory.contents = postContent;
+        
+        myWindow.close();
+    }
     
-    myWindow.show ();
+    myWindow.show();
 }
 
 function fetchPosts(url){
