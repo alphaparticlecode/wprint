@@ -5,6 +5,8 @@
 Main();
 
 function Main(){
+    
+    var postContent;
      
     var myWindow = new Window ("dialog", "WordPress Importer");
     var urlInputGroup = myWindow.add("group");
@@ -73,14 +75,16 @@ function Main(){
     insertButton.onClick = function(){
         var postIndex = postList.selection.index;
         
-        var postContent = posts[postIndex].content.rendered;
+        postContent = posts[postIndex].content.rendered;
         
-        app.selection[0].parentStory.contents = postContent;
-        
-        myWindow.close();
+        myWindow.close(1);
     }
     
-    myWindow.show();
+    var result = myWindow.show();
+    
+    if (result == 1) {
+        app.selection[0].parentStory.contents = postContent;
+    }
 }
 
 function fetchPosts(url){
