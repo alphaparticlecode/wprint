@@ -107,6 +107,16 @@ function sanitizePostContent(content){
     //Strip links for v0.1
     content = content.replace(/<a\b[^>]*>/ig,"").replace(/<\/a>/ig, "");
 
+    //For all the elements we're keeping, strip classes, IDs and all other args
+    content = content.replace(/<h1(.*?)>/g, "<h1>");
+    content = content.replace(/<h2(.*?)>/g, "<h2>");
+    content = content.replace(/<h3(.*?)>/g, "<h3>");
+    content = content.replace(/<h4(.*?)>/g, "<h4>");
+    content = content.replace(/<h5(.*?)>/g, "<h5>");
+    content = content.replace(/<h6(.*?)>/g, "<h6>");
+    content = content.replace(/<strong(.*?)>/g, "<strong>");
+    content = content.replace(/<em(.*?)>/g, "<em>");
+
     return content;
 }
 
