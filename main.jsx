@@ -77,6 +77,8 @@ function Main(){
         
         postContent = posts[postIndex].content.rendered;
         
+        postContent = sanitizePostContent(postContent);
+        
         myWindow.close(1);
     }
     
@@ -95,6 +97,14 @@ function fetchPosts(url){
     posts = eval(reply.body);
     
     return posts;
+}
+
+function sanitizePostContent(content){
+
+    //Strip all opening <p> tags,  Replace all closing </p> tags with new lines
+    content = content.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '\r');
+
+    return content;
 }
 
 
