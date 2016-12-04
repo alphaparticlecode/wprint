@@ -104,6 +104,9 @@ function sanitizePostContent(content){
     //Strip all opening <p> tags,  Replace all closing </p> tags with new lines
     content = content.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '\r');
 
+    //Strip links for v0.1
+    content = content.replace(/<a\b[^>]*>/ig,"").replace(/<\/a>/ig, "");
+
     return content;
 }
 
