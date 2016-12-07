@@ -7,6 +7,8 @@ Main();
 function Main(){
     
     var postContent;
+    
+    var doc   = app.properties.activeDocument;
      
     var myWindow = new Window ("dialog", "WordPress Importer");
     var urlInputGroup = myWindow.add("group");
@@ -86,6 +88,73 @@ function Main(){
     
     if (result == 1) {
         app.selection[0].parentStory.contents = postContent;
+        
+        //Tagging all headers
+        var head1 = doc.characterStyles.itemByName('Head1');  
+        var head2 = doc.characterStyles.itemByName('Head2');  
+        var head3 = doc.characterStyles.itemByName('Head3');  
+        var head4 = doc.characterStyles.itemByName('Head4');  
+        var head5 = doc.characterStyles.itemByName('Head5');  
+        var head6 = doc.characterStyles.itemByName('Head6');  
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h1.*>(.*)<\/h1>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head1,  
+        };  
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h2.*>(.*)<\/h2>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head2,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h3.*>(.*)<\/h3>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head3,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h4.*>(.*)<\/h4>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head4,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h5.*>(.*)<\/h5>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head5,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<h6.*>(.*)<\/h6>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: head6,  
+        };  
+
+        doc.changeGrep();
     }
 }
 
@@ -106,14 +175,7 @@ function sanitizePostContent(content){
 
     //Strip links for v0.1
     content = content.replace(/<a\b[^>]*>/ig,"").replace(/<\/a>/ig, "");
-
-    //For all the elements we're keeping, strip classes, IDs and all other args
-    content = content.replace(/<h1(.*?)>/g, "<h1>");
-    content = content.replace(/<h2(.*?)>/g, "<h2>");
-    content = content.replace(/<h3(.*?)>/g, "<h3>");
-    content = content.replace(/<h4(.*?)>/g, "<h4>");
-    content = content.replace(/<h5(.*?)>/g, "<h5>");
-    content = content.replace(/<h6(.*?)>/g, "<h6>");
+    
     content = content.replace(/<strong(.*?)>/g, "<strong>");
     content = content.replace(/<em(.*?)>/g, "<em>");
 
