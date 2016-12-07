@@ -99,84 +99,15 @@ function Main(){
         var bold = doc.characterStyles.itemByName('Bold');
         var italic = doc.characterStyles.itemByName('Italic');
         
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h1.*>(.*)<\/h1>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head1,  
-        };  
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h2.*>(.*)<\/h2>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head2,  
-        };  
+        stripTagsAndStyle('h1', head1, doc);
+        stripTagsAndStyle('h2', head2, doc);
+        stripTagsAndStyle('h3', head3, doc);
+        stripTagsAndStyle('h4', head4, doc);
+        stripTagsAndStyle('h5', head5, doc);
+        stripTagsAndStyle('h6', head6, doc);
 
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h3.*>(.*)<\/h3>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head3,  
-        };  
-
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h4.*>(.*)<\/h4>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head4,  
-        };  
-
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h5.*>(.*)<\/h5>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head5,  
-        };  
-
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<h6.*>(.*)<\/h6>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: head6,  
-        };  
-
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<strong.*>(.*)<\/strong>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: bold,  
-        };  
-
-        doc.changeGrep();
-        
-        app.findGrepPreferences = app.changeGrepPreferences = null;
-        app.findGrepPreferences.findWhat="<em.*>(.*)<\/em>";
-    
-        app.changeGrepPreferences.properties = {  
-            changeTo: '$1',  
-            appliedCharacterStyle: italic,  
-        };  
-
-        doc.changeGrep();
+        stripTagsAndStyle('strong', bold, doc);
+        stripTagsAndStyle('em', italic, doc);
     }
 }
 
@@ -201,6 +132,18 @@ function sanitizePostContent(content){
     content = content.replace(/<br[^>]*>/g, '').replace(/<hr[^>]*>/g, '\r');
 
     return content;
+}
+
+function stripTagsAndStyle(tag, characterStyle, document){
+  app.findGrepPreferences = app.changeGrepPreferences = null;
+  app.findGrepPreferences.findWhat = "<" + tag + ".*>(.*)<\/" + tag + ">";
+
+  app.changeGrepPreferences.properties = {  
+      changeTo: '$1',  
+      appliedCharacterStyle: characterStyle,  
+  };  
+
+  document.changeGrep();
 }
 
 
