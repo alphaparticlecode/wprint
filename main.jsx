@@ -93,9 +93,11 @@ function Main(){
         var head1 = doc.characterStyles.itemByName('Head1');  
         var head2 = doc.characterStyles.itemByName('Head2');  
         var head3 = doc.characterStyles.itemByName('Head3');  
-        var head4 = doc.characterStyles.itemByName('Head4');  
+        var head4 = doc.characterStyles.itemByName('Head4');
         var head5 = doc.characterStyles.itemByName('Head5');  
-        var head6 = doc.characterStyles.itemByName('Head6');  
+        var head6 = doc.characterStyles.itemByName('Head6');
+        var bold = doc.characterStyles.itemByName('Bold');
+        var italic = doc.characterStyles.itemByName('Italic');
         
         app.findGrepPreferences = app.changeGrepPreferences = null;
         app.findGrepPreferences.findWhat="<h1.*>(.*)<\/h1>";
@@ -152,6 +154,26 @@ function Main(){
         app.changeGrepPreferences.properties = {  
             changeTo: '$1',  
             appliedCharacterStyle: head6,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<strong.*>(.*)<\/strong>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: bold,  
+        };  
+
+        doc.changeGrep();
+        
+        app.findGrepPreferences = app.changeGrepPreferences = null;
+        app.findGrepPreferences.findWhat="<em.*>(.*)<\/em>";
+    
+        app.changeGrepPreferences.properties = {  
+            changeTo: '$1',  
+            appliedCharacterStyle: italic,  
         };  
 
         doc.changeGrep();
