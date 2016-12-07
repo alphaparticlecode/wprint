@@ -14,12 +14,12 @@ An InDesign Script to pull WordPress posts directly into your layouts.
 
 ###IMPORTANT: The following character styles must exist in InDesign before you run the import script for them to be mapped properly
 
-<h1> -> Head1
-<h2> -> Head2
-<h3> -> Head3
-<h4> -> Head4
-<h5> -> Head5
-<h6> -> Head6
-<strong> -> Bold
-<em> -> Italic
+Head1
+Head2
+Head3
+Head4
+Head5
+Head6
+Bold
+Italic
 
