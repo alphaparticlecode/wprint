@@ -197,9 +197,6 @@ function sanitizePostContent(content){
 
     //Strip links for v0.1
     content = content.replace(/<a\b[^>]*>/ig,"").replace(/<\/a>/ig, "");
-    
-    content = content.replace(/<strong(.*?)>/g, "<strong>");
-    content = content.replace(/<em(.*?)>/g, "<em>");
 
     content = content.replace(/<br[^>]*>/g, '').replace(/<hr[^>]*>/g, '\r');
 
