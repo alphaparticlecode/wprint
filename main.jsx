@@ -98,6 +98,7 @@ function Main(){
         var head6 = doc.characterStyles.itemByName('Head6');
         var bold = doc.characterStyles.itemByName('Bold');
         var italic = doc.characterStyles.itemByName('Italic');
+        var blockquote = doc.characterStyles.itemByName('BlockQuote');
         
         stripTagsAndStyle('h1', head1, doc);
         stripTagsAndStyle('h2', head2, doc);
@@ -108,6 +109,7 @@ function Main(){
 
         stripTagsAndStyle('strong', bold, doc);
         stripTagsAndStyle('em', italic, doc);
+        stripTagsAndStyle('blockquote', italic, doc);
     }
 }
 
@@ -137,6 +139,10 @@ function sanitizePostContent(content){
 function stripTagsAndStyle(tag, characterStyle, document){
   app.findGrepPreferences = app.changeGrepPreferences = null;
   app.findGrepPreferences.findWhat = "<" + tag + ".*>(.*)<\/" + tag + ">";
+  
+  if(tag == 'blockquote'){
+      app.findGrepPreferences.findWhat = "<blockquote>\n(.*)\n</blockquote>";
+  }
 
   app.changeGrepPreferences.properties = {  
       changeTo: '$1',  

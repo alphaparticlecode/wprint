@@ -10,14 +10,15 @@ Part of doejo's [Publishing Playbook](http://thepublishingplaybook.com)
 
 Before you're able to run the import script, you'll need to make sure you have all the requisite character styles set up. The character styles (and the HTML tags they map to) are:
 
-	Head1  (for <h1>)
-	Head2  (for <h2>)
-	Head3  (for <h3>)
-	Head4  (for <h4>)
-	Head5  (for <h5>)
-	Head6  (for <h6>)
-	Bold   (for <strong>)
-	Italic (for <em>)
+	Head1      (for <h1>)
+	Head2      (for <h2>)
+	Head3      (for <h3>)
+	Head4      (for <h4>)
+	Head5      (for <h5>)
+	Head6      (for <h6>)
+	Bold       (for <strong>)
+	Italic     (for <em>)
+	BlockQuote (for <blockquote>)
 
 ####IMPORTANT: The following character styles must exist in InDesign before you run the import script for them to be mapped properly.
 
