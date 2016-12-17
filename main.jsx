@@ -132,6 +132,12 @@ function sanitizePostContent(content){
     content = content.replace(/<a\b[^>]*>/ig,"").replace(/<\/a>/ig, "");
 
     content = content.replace(/<br[^>]*>/g, '').replace(/<hr[^>]*>/g, '\r');
+    
+    content = content.replace(/<ul[^>]*>/g, '').replace(/<\/ul>/g, "");
+    
+    content = content.replace(/<ol[^>]*>/g, '').replace(/<\/ol>/g, "");
+    
+    content = content.replace(/<li[^>]*>/g, '').replace(/<\/li>/g, "");
 
     return content;
 }
