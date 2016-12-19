@@ -48,37 +48,13 @@ function Main(){
     actionButtonGroup.add ("button", undefined, "Cancel");
     var insertButton = actionButtonGroup.add ("button", undefined, "Insert");
     
-    urlUpdateButton.onClick = function () {
-        postList.removeAll();
-        
-        if(siteUrl.text[siteUrl.text.length-1] != '/'){
-            siteUrl.text = siteUrl.text + '/';
-        }
-        
-        var url = siteUrl.text + "wp-json/wp/v2/posts";
-        posts = fetchPosts(url);
-        
-        for (var i = 0; i < posts.length; i++){
-            var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
-            postList.add("item", postString);
-        }
-     }
+    urlUpdateButton.onClick = function(){
+        populatePosts(postList, siteUrl, false);
+    }
  
-     searchButton.onClick = function () {
-        postList.removeAll();
-        
-        if(siteUrl.text[siteUrl.text.length-1] != '/'){
-            siteUrl.text = siteUrl.text + '/';
-        }
-        
-        var url = siteUrl.text + "wp-json/wp/v2/posts?search=" + encodeURIComponent(postSearch.text);;
-        posts = fetchPosts(url);
-        
-        for (var i = 0; i < posts.length; i++){
-            var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
-            postList.add("item", postString);
-        }
-     }
+    searchButton.onClick = function(){
+        populatePosts(postList, siteUrl, true, postSearch);
+    }
  
     insertButton.onClick = function(){
         var postIndex = postList.selection.index;
@@ -88,6 +64,10 @@ function Main(){
         postContent = sanitizePostContent(postContent);
         
         myWindow.close(1);
+    }
+
+     if(siteUrl.text != ''){
+      populatePosts(postList, siteUrl, false);
     }
     
     var result = myWindow.show();
@@ -119,6 +99,28 @@ function Main(){
         
         // Storing the latest URL
         app.activeDocument.insertLabel('wpRestURL', siteUrl.text);
+    }
+}
+
+function populatePosts(postList, siteUrl,isSearch, postSearch) {
+      postList.removeAll();
+        
+      if(siteUrl.text[siteUrl.text.length-1] != '/'){
+         siteUrl.text = siteUrl.text + '/';
+     }
+ 
+    if(isSearch){
+        var url = siteUrl.text + "wp-json/wp/v2/posts?search=" + encodeURIComponent(postSearch.text);
+    }
+    else {
+        var url = siteUrl.text + "wp-json/wp/v2/posts";
+    }
+        
+     posts = fetchPosts(url);
+        
+     for (var i = 0; i < posts.length; i++){
+        var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
+        postList.add("item", postString);
     }
 }
 
