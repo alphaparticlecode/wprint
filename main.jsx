@@ -18,6 +18,12 @@ function Main(){
     var siteUrl = urlInputGroup.add ("edittext", undefined, "");
     siteUrl.characters = 50;
     
+    var existingUrl = app.activeDocument.extractLabel('wpRestURL');
+    
+    if(existingUrl != ''){
+      siteUrl.text = existingUrl;  
+    }
+    
     urlUpdateButton = urlInputGroup.add ("button", undefined, "Update");
     
     var searchGroup = myWindow.add("group");
@@ -110,6 +116,9 @@ function Main(){
         stripTagsAndStyle('strong', bold, doc);
         stripTagsAndStyle('em', italic, doc);
         stripTagsAndStyle('blockquote', italic, doc);
+        
+        // Storing the latest URL
+        app.activeDocument.insertLabel('wpRestURL', siteUrl.text);
     }
 }
 
