@@ -131,8 +131,12 @@ function populatePosts(postList, siteUrl,isSearch, postSearch) {
 }
 
 function fetchPosts(url){
-    // TODO: Add timeout if URL isn't available
     reply = GetURL(url);
+    
+    if(reply.status.indexOf('404') !== -1  ){
+      alert('WP REST API was not found.  Double check your URL and try again.');
+      return false;
+    }
     
     // Converting string returned by GetURL into an actual object that we can use
     posts = eval(reply.body);
@@ -240,7 +244,7 @@ function GetURL(url,isBinary, recursive301CallLevel)
     // Open up a socket, and set the time out to 2 minutes. The timeout
     // could be parametrized - I leave that as an exercise.
     var socket = new Socket;    
-    socket.timeout = 120;
+    socket.timeout = 5;
     
     //
     // Open the socket in binary mode. Sockets could also be opened in UTF-8 mode
