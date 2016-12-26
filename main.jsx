@@ -69,8 +69,14 @@ function Main(){
      if(siteUrl.text != ''){
       populatePosts(postList, siteUrl, false);
     }
-    
-    var result = myWindow.show();
+
+    // If there is no text frame selected, alert the user and make them go back and select one
+    if( !app.selection[0] ) {
+      alert('Please select a text frame first.');  
+    }
+    else {
+        var result = myWindow.show();
+    }
     
     if (result == 1) {
         app.selection[0].parentStory.contents = postContent;
