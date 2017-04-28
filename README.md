@@ -48,7 +48,8 @@ Since this script is very new and still under active development, one of the bes
 
 In addition to testing and contributing code, you see a place where the documentation is unclear or incorrect, please submit a pull request with that change as well.  We want more than just developers helping us to make this better and easier to use for everyone.
 
-###Questions?
+### Questions?
 Email - [k.koppenhaver@gmail.com](mailto:k.koppenhaver@gmail.com)
+
 Twitter - [@kkoppenhaver](http://twitter.com/kkoppenhaver)
 
