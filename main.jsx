@@ -101,7 +101,7 @@ function Main(){
 
         stripTagsAndStyle('strong', bold, doc);
         stripTagsAndStyle('em', italic, doc);
-        stripTagsAndStyle('blockquote', italic, doc);
+        stripTagsAndStyle('blockquote', blockquote, doc);
         
         // Storing the latest URL
         app.activeDocument.insertLabel('wpRestURL', siteUrl.text);
@@ -168,7 +168,7 @@ function stripTagsAndStyle(tag, characterStyle, document){
   app.findGrepPreferences.findWhat = "<" + tag + ".*>(.*)<\/" + tag + ">";
   
   if(tag == 'blockquote'){
-      app.findGrepPreferences.findWhat = "<blockquote>\n(.*)\n</blockquote>";
+      app.findGrepPreferences.findWhat = "(?s)<blockquote>(.*)<\/blockquote>";
   }
 
   app.changeGrepPreferences.properties = {  
