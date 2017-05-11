@@ -133,7 +133,7 @@ function populatePosts(postList, siteUrl,isSearch, postSearch) {
 function fetchPosts(url){
     reply = GetURL(url);
     
-    if(reply.status.indexOf('404') !== -1  ){
+    if(reply || reply.status.indexOf('404') !== -1  ){
       alert('WP REST API was not found.  Double check your URL and try again.');
       return false;
     }
