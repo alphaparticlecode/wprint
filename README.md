@@ -1,4 +1,4 @@
-# WP -> InDesign Bridge
+# WPrint
 
 An InDesign Script to pull WordPress posts directly into your layouts. This script uses the WP REST API to expose your WordPress posts to InDesign.  It allows you to search through your posts or browse them chronologically before picking one and dropping it into the currently selected text area in InDesign.  All your markup will be transformed into character styles and once these character styles are set up, 80% of your formatting work can be done, all without ever copy and pasting.
 
@@ -41,7 +41,7 @@ FAQs to come
 
 ### Reporting Issues
 
-This script is very new and may have bugs.  As we continue to test and develop it, please help us out by reporting any bugs you come across on on our [issue tracker](https://github.com/kkoppenhaver/wp-indesign-bridge/issues). Be sure to include any steps that you can take to reproduce the issue and other important information such as which version of InDesign you're running, which operating system and OS version you are running.
+This script is very new and may have bugs.  As we continue to test and develop it, please help us out by reporting any bugs you come across on on our [issue tracker](https://github.com/alphaparticlecode/wprint/issues). Be sure to include any steps that you can take to reproduce the issue and other important information such as which version of InDesign you're running, which operating system and OS version you are running.
 
 ### Contributing
 Since this script is very new and still under active development, one of the best ways to contribute is by testing and reporting issues (see above).  If after you've opened an issue, you would like to contribute a patch, that's great! Create a pull request and reference the issue you've created and we'll work on getting it merged.
@@ -49,7 +49,7 @@ Since this script is very new and still under active development, one of the bes
 In addition to testing and contributing code, you see a place where the documentation is unclear or incorrect, please submit a pull request with that change as well.  We want more than just developers helping us to make this better and easier to use for everyone.
 
 ### Questions?
-Email - [k.koppenhaver@gmail.com](mailto:k.koppenhaver@gmail.com)
+Email - [keanan@alphaparticle.com](mailto:keanan@alphaparticle.com)
 
 Twitter - [@kkoppenhaver](http://twitter.com/kkoppenhaver)
 
