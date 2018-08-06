@@ -153,6 +153,17 @@ function sanitizePostContent(content){
     content = content.replace(/<ol[^>]*>/g, '').replace(/<\/ol>/g, "");
     content = content.replace(/<li[^>]*>/g, '').replace(/<\/li>/g, "");
 
+    image_regex = /<img .*src="(.*?)".*\/>/g;
+    while ( ( image_matches = image_regex.exec( content ) ) !== null) {
+      image_url = image_matches[1];
+
+      image_name = image_url.split('/');
+      image_name = image_name[image_name.length - 1];
+
+      image_placeholder = '[image ' + image_name + ']';
+      content = content.replace(image_matches[0], image_placeholder);
+    }
+
     return content;
 }
 
