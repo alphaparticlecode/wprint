@@ -152,6 +152,7 @@ function sanitizePostContent(content){
     content = content.replace(/<ul[^>]*>/g, '').replace(/<\/ul>/g, "");
     content = content.replace(/<ol[^>]*>/g, '').replace(/<\/ol>/g, "");
     content = content.replace(/<li[^>]*>/g, '').replace(/<\/li>/g, "");
+    content = content.replace(/<div[^>]*>/g, '').replace(/<\/div>/g, "");
 
     image_regex = /<img .*src="(.*?)".*\/>/g;
     while ( ( image_matches = image_regex.exec( content ) ) !== null) {
