@@ -13,7 +13,7 @@ function postsHandler(data) {
   posts = eval(data);
   
   for (var i = 0; i < posts.length; i++){
-    var postString = posts[i].title.rendered + " @ " + posts[i].date.split("T")[0];
+    var postString = decodeHTMLEntities(posts[i].title.rendered) + " @ " + posts[i].date.split("T")[0];
     postList.add("item", postString);
   }
 }
@@ -164,6 +164,8 @@ function sanitizePostContent(content){
       content = content.replace(image_matches[0], image_placeholder);
     }
 
+    content = decodeHTMLEntities(content);
+
     return content;
 }
 
@@ -181,4 +183,12 @@ function stripTagsAndStyle(tag, characterStyle, document){
   };  
 
   document.changeGrep();
+}
+
+function decodeHTMLEntities(input_string){
+  input_string = input_string.replace('&nbsp;', ' ');
+  
+  return (input_string+"").replace(/&#\d+;/gm,function(s) {
+    return String.fromCharCode(s.match(/\d+/gm)[0]);
+  });
 }
