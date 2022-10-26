@@ -1,6 +1,6 @@
 // WP -> InDesign - Import posts from WordPress into InDesign
 // Author: Keanan Koppenhaver
-#include "JSInterface.jsx"
+#include "./JSInterface.jsx"
 #targetengine JSEngine
 
 var postList;
